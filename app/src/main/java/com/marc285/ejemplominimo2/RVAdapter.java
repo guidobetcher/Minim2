@@ -36,7 +36,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.RVViewHolder> {
     public void onBindViewHolder(@NonNull RVViewHolder holder, int position) {
         holder.museumText.setText(museumelements.get(position).getAdrecaNom());
         //Museum image (in URL format) is loaded by means of Picasso
-        Picasso.with(context).load(museumelements.get(position).getImatge().get(0));
+        Picasso.with(context).load(museumelements.get(position).getImatge().get(0)).into(holder.museumImage);
     }
 
     @Override

@@ -2,7 +2,6 @@ package com.marc285.ejemplominimo2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -32,7 +31,7 @@ public class SplashActivity extends AppCompatActivity {
 
         //We will open the new Activity when 'loading time' is finished
         Random r = new Random();
-        int loadtime = (r.nextInt(11 - 6) + 6); //Bounded load time (prudential time to let Picasso load pictures) between 6 and 10 seconds
+        int loadtime = (r.nextInt(9 - 4) + 4); //Bounded load time (prudential time to let Picasso load pictures) between 4 and 8 seconds
 
         final Handler h = new Handler();
         h.postDelayed(new Runnable() {

@@ -5,7 +5,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.os.Trace;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
