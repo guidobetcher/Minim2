@@ -3,8 +3,9 @@ package com.marc285.ejemplominimo2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
@@ -21,27 +22,28 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Load 'Diputacio de Barcelona' logo (https://www.vectorlogo.es/wp-content/uploads/2014/12/logo-vector-diputacion-barcelona-horizontal.jpg)
+        Picasso.with(this).load("https://www.vectorlogo.es/wp-content/uploads/2014/12/logo-vector-diputacion-barcelona-horizontal.jpg").noFade().into(diputacioBCNlogoImageView);
+
+        final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean registred = sharedPref.getBoolean("registered", false);
+
         setContentView(R.layout.activity_splash);
 
         splashProgress = findViewById(R.id.splashProgressBar);
         diputacioBCNlogoImageView = findViewById(R.id.dibalogoImageView);
 
-        //Load 'Diputacio de Barcelona' logo (https://www.vectorlogo.es/wp-content/uploads/2014/12/logo-vector-diputacion-barcelona-horizontal.jpg)
-        Picasso.with(this).load("https://www.vectorlogo.es/wp-content/uploads/2014/12/logo-vector-diputacion-barcelona-horizontal.jpg").noFade().into(diputacioBCNlogoImageView);
+        Class dest;
+        if(!registred){
+            dest = LoginActivity.class;
+        } else{
+            dest = ListActivity.class;
+        }
 
-        //We will open the new Activity when 'loading time' is finished
-        Random r = new Random();
-        int loadtime = (r.nextInt(9 - 4) + 4); //Bounded load time (prudential time to let Picasso load pictures) between 4 and 8 seconds
-
-        final Handler h = new Handler();
-        h.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                //Open the ListActivity
-                Intent intent = new Intent (getApplicationContext(), ListActivity.class);
-                startActivity(intent);
-            }
-        }, 1000*loadtime);
+        Intent intent = new Intent(this, dest);
+        startActivity(intent);
+        finish();
 
     }
 }
